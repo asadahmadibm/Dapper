@@ -20,3 +20,73 @@ QueryMultiple – an extension method that executes multiple queries within the 
 Dapper – PM> Install-Package Dapper
 
 SQL Client – PM> Install-Package Microsoft.Data.SqlClient
+
+# Example FOR CRUD
+ INSERT :
+
+string query = "Insert into school values(@id,@name,@address)";
+
+var q = await con.ExecuteAsync(query, school);
+
+Update :
+
+string query = "Update School set id=@id,name=@name,address=@address where id=@id";
+
+var affectedRows = await con.ExecuteAsync(query, school);
+
+Delete :
+
+string del = "delete from school where id=@id";
+
+var deletedcount=await con.ExecuteAsync(del,new
+{id = id });
+
+Get all:
+
+var cnn = _schoolContext.CreateConnection();
+
+string query = "Select * from School";
+
+var list = await cnn.QueryAsync<School>(query);
+
+return list.ToList();
+
+Get by id :
+
+string query = "select * from School Where id=@id";
+            
+var result= await con.QueryFirstAsync<School>(query,new
+            {
+                Id = id
+            });
+
+Translation:
+
+public async Task CreateMultipleschools(List<School> schools)
+        
+{
+            
+     string query = "Insert into School values(@id,@name,@address)";
+            
+     con.Open();
+            
+   using (var trans=con.BeginTransaction())
+            
+   {
+                
+    foreach (var item in schools)
+              
+    {
+                   
+     var res=await con.ExecuteAsync(query,item, transaction: trans);
+                
+     }
+                
+      trans.Commit();
+            
+    }
+        
+}
+
+
+
