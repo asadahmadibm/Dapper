@@ -14,6 +14,7 @@ namespace APIWithDapperTutorial.Controllers
             _schoolRepository = schoolRepository;
         }
 
+
         [HttpGet(Name ="GetAll")]
         public async Task<IActionResult> GetAllSchool()
         {
