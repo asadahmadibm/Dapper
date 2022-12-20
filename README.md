@@ -98,4 +98,9 @@ Sp
 
      var res=await con.QueryFirstAsync<School>(ProcedureName, parameters, commandType: CommandType.StoredProcedure);
 
+Or
+     var procedure = "[Sales by Year]";
 
+     var values = new { Beginning_Date = "2017.1.1", Ending_Date = "2017.12.31" };
+
+     var results = connection.Query(procedure, values, commandType: CommandType.StoredProcedure).ToList();
