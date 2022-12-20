@@ -88,5 +88,10 @@ public async Task CreateMultipleschools(List<School> schools)
         
 }
 
+Sp
+     string ProcedureName = "SpGetById";
+     var parameters = new DynamicParameters();
+     parameters.Add("Id", id, DbType.Int32, ParameterDirection.Input);
+     var res=await con.QueryFirstAsync<School>(ProcedureName, parameters, commandType: CommandType.StoredProcedure);
 
 
