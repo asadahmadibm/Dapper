@@ -1,4 +1,5 @@
-﻿using APIWithDapperTutorial.Entities;
+﻿using APIWithDapper.Entities;
+using APIWithDapperTutorial.Entities;
 
 namespace APIWithDapperTutorial.Core
 {
@@ -11,7 +12,7 @@ namespace APIWithDapperTutorial.Core
         Task<int> UpdateSchoolAsync(School school);
         Task<int> DeleteSchoolByIdAsync(int id);
         Task CreateMultipleschools(List<School> schools);
-        List<ReportInfo> GetReport(int PageIndex, int PageSize, out int TotalRecords)
+        List<ReportInfo> GetReport(int PageIndex, int PageSize, out int TotalRecords);
         //        Task<School> GetSchoolByStudentIdAsync(int studentId);
         //        Task<School> GetSchoolWithStudentsBySchoolId(int schoolId);
         //        Task<List<School>> GetMultipleSchoolsAndStudentsAsyn();

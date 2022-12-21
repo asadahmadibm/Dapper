@@ -1,5 +1,7 @@
-﻿using APIWithDapperTutorial.Entities;
+﻿using APIWithDapper.Entities;
+using APIWithDapperTutorial.Entities;
 using Dapper;
+using Microsoft.Data.SqlClient;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Data;
 
