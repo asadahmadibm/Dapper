@@ -50,9 +50,8 @@ namespace APIWithDapperTutorial.Core
 
         public async Task<IEnumerable<School>> GetAllSchoolsAsync()
         {
-            var cnn = _schoolContext.CreateConnection();
             string query = "Select * from School";
-            var list = await cnn.QueryAsync<School>(query);
+            var list = await con.QueryAsync<School>(query);
             return list.ToList();
         }
 
