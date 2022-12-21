@@ -64,6 +64,14 @@ namespace APIWithDapperTutorial.Core
             });
             return result;
         }
+        
+        public async Task<int> UpdateSchoolAsync(School school)
+        {
+            string query = "Update School set id=@id,name=@name,address=@address where id=@id";
+
+            var affectedRows = await con.ExecuteAsync(query, school);
+            return affectedRows;
+        }
 
         public async Task<School> GetSchoolByIdStoredProcedureAsync(int id)
         {
@@ -74,13 +82,22 @@ namespace APIWithDapperTutorial.Core
             return res;
 
         }
-
-        public async Task<int> UpdateSchoolAsync(School school)
+        
+        public  List<ReportInfo> GetReport(int PageIndex, int PageSize, out int TotalRecords)
         {
-            string query = "Update School set id=@id,name=@name,address=@address where id=@id";
+            TotalRecords = 0;
 
-            var affectedRows = await con.ExecuteAsync(query, school);
-            return affectedRows;
+            string ProcedureName1 = "dbo.CBI_GetReport";
+            var parameters1 = new DynamicParameters();
+            parameters1.Add("PageIndex", PageIndex, DbType.Int32, ParameterDirection.Input);
+            parameters1.Add("PageSize", PageSize, DbType.Int32, ParameterDirection.Input);
+            var res1 = con.QueryMultiple(ProcedureName1, parameters1, commandType: CommandType.StoredProcedure);
+
+            List<ReportInfo> rReportInfo = res1.Read<ReportInfo>().ToList();
+            TotalRecords = res1.Read<dynamic>().Single().totalRecords;
+            return rReportInfo;
         }
+
+        
     }
 }
