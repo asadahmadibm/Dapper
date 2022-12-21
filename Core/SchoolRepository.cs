@@ -7,12 +7,12 @@ namespace APIWithDapperTutorial.Core
 {
     public class SchoolRepository : ISchoolRepostory
     {
-        private readonly SchoolContext _schoolContext;
+        private  readonly IConfiguration _configuration;
         IDbConnection con;
-        public SchoolRepository(SchoolContext schoolContext)
+        public SchoolRepository(IConfiguration configuration)
         {
-            _schoolContext = schoolContext;
-            con = _schoolContext.CreateConnection();
+             _configuration = configuration;
+            con= new SqlConnection(_configuration.GetConnectionString("SqlConnection"));
         }
 
         public async Task CreateMultipleschools(List<School> schools)
