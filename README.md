@@ -104,3 +104,8 @@ Or
      var values = new { Beginning_Date = "2017.1.1", Ending_Date = "2017.12.31" };
 
      var results = connection.Query(procedure, values, commandType: CommandType.StoredProcedure).ToList();
+
+
+Mastering Dapper in .NET Core: Advanced Techniques and Tips | by Zuraiz Ahmed Shehzad | Medium
+https://medium.com/@ZuraizAhmedShehzad/mastering-dapper-in-net-core-advanced-techniques-and-tips-fad328bba5af
+
